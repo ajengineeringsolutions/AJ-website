@@ -5,7 +5,259 @@
 <meta name="description" content="Support for GeM cataloguing, product onboarding, government procurement requirements and tender-related activities for businesses and organizations.">
 <link rel="icon" href="/assets/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=muq34ssp"><link rel="canonical" href="https://ajengineeringsolutions.com/gem/">
+<style id="site-css">/* ================= THEME VARIABLES (EDIT COLORS / FONTS HERE) ================= */
+:root{--bg:#081a38;--bg-deep:#040c1c;--panel:#0b2045;--neon:#6d7dff;--neon2:#8a63ff;--glow:rgba(109,125,255,.28);--line:rgba(160,180,210,.2);--text:#e8ecf3;--muted:#98a5bb;--red:#d8352b;--blue:#2a3f9c;
+--serif:'DM Serif Display',Georgia,serif;--sans:'Manrope',system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.7 var(--sans);overflow-x:hidden}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.08}
+h1{font-size:clamp(40px,5.6vw,76px)}h2{font-size:clamp(34px,4.4vw,58px)}h3{font-size:24px}
+em{color:var(--muted);font-style:italic}p{margin:0 0 1em;color:var(--muted)}
+.w{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+section{padding:clamp(64px,9vw,120px) 0;position:relative}
+.eb{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}.eb:before{content:"";width:28px;height:1px;background:var(--red)}
+.btn{display:inline-flex;gap:10px;align-items:center;padding:15px 26px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border:1px solid var(--red);color:#fff;transition:.3s;cursor:pointer;background:none;font-family:inherit}
+.btn.r{background:var(--red)}.btn:hover{background:#fff;color:var(--bg);border-color:#fff}
+.lk{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}.lk:hover{color:var(--red)}
+.row{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-top:34px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+/* ================= HEADER & NAV ================= */
+header{position:fixed;inset:0 0 auto;z-index:50;background:rgba(8,26,56,.97);border-bottom:1px solid var(--line)}
+header .w{display:flex;justify-content:space-between;align-items:center;height:116px;max-width:1360px}
+header img{height:104px;width:auto;object-fit:contain;position:relative}.lg{position:relative;display:block}.lg:before{content:"";position:absolute;inset:-6px -20px;background:radial-gradient(closest-side,rgba(215,225,255,.16),transparent);z-index:0;pointer-events:none}
+nav>ul{display:flex;gap:30px;list-style:none;margin:0;padding:0;align-items:center}
+nav a.n{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 0;border-bottom:1px solid transparent;color:var(--muted)}
+nav a.n:hover,nav a.on{color:#fff;border-color:var(--red)}
+.dd{position:relative}.dd>a:after{content:" \2304";font-size:10px}
+.sub{position:absolute;top:100%;left:-24px;min-width:310px;background:var(--bg-deep);border:1px solid var(--line);padding:10px 0;list-style:none;margin:0;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .25s .4s,transform .25s .4s,visibility 0s .65s}
+.dd:hover .sub,.dd:focus-within .sub,.dd.o .sub{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.sub a{display:block;padding:12px 24px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.sub a:before{content:"\2192  ";color:var(--red)}.sub a:hover{color:#fff;background:rgba(255,255,255,.04)}
+#mb{display:none;background:none;border:1px solid var(--line);color:#fff;width:44px;height:44px;font-size:20px;cursor:pointer}
+@media(max-width:1000px){#mb{display:block}nav{position:fixed;inset:116px 0 0;background:var(--bg-deep);padding:24px;display:none;overflow:auto}nav.o{display:block}nav>ul{flex-direction:column;align-items:flex-start;gap:6px}nav a.n{font-size:15px;display:block;padding:10px 0}.sub{position:static;opacity:1;visibility:visible;transform:none;border:0;padding:0 0 0 12px;background:none}}
+/* ================= HERO & SLIDER ================= */
+.hero{min-height:100svh;padding:170px 0 70px;display:flex;align-items:center}
+.hg{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero p{max-width:520px;margin-top:26px;color:#c3ccdb}
+.sl{position:relative;overflow:hidden;height:min(58vh,520px);background:var(--bg-deep)}
+.sl .s{position:absolute;inset:0;clip-path:inset(0 0 0 100%);transition:clip-path 1s cubic-bezier(.77,0,.18,1);z-index:1}
+.sl[data-v="1"] .s{clip-path:inset(100% 0 0 0)}.sl[data-v="2"] .s{clip-path:inset(0 100% 0 0)}.sl[data-v="3"] .s{clip-path:inset(0 0 100% 0)}.sl .s.on{clip-path:inset(0);z-index:2}.sl .s.pv{clip-path:inset(0);transition:none}
+.sl img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);will-change:transform}.s.on img{transform:none;transition:transform 5s linear}
+.sl .s:after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(4,12,28,.18),transparent 35%,rgba(5,15,30,.88))}
+.cap{position:absolute;left:24px;right:24px;bottom:52px;z-index:3;opacity:0;transform:translateY(12px);transition:.6s .5s}.s.on .cap{opacity:1;transform:none}
+.cap b{font:400 26px var(--serif);display:block}.cap span{font-size:13px;color:var(--muted);display:block;max-width:440px}
+.dt{position:absolute;right:20px;bottom:20px;z-index:4;display:flex;gap:6px}.dt button{width:28px;height:14px;background:none;border:0;padding:0;cursor:pointer;position:relative}.dt button:after{content:"";position:absolute;inset:6px 0;background:rgba(255,255,255,.3)}.dt .on:after{background:var(--red)}
+.ar{position:absolute;top:50%;z-index:4;background:rgba(5,15,30,.6);border:1px solid var(--line);color:#fff;width:40px;height:40px;cursor:pointer;transform:translateY(-50%)}.ar.l{left:12px}.ar.r{right:12px}
+.tk{display:flex;justify-content:space-between;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);gap:12px;flex-wrap:wrap}
+/* ================= DELIVER (TABBED FULL-WIDTH) ================= */
+.dv{padding:0;min-height:620px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.dv .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s;filter:brightness(.45)}.dv .bg.on{opacity:1}
+.dv .w{position:relative;width:100%}.dv .tx{padding:100px 0 40px;max-width:640px}
+.tabs{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--line);background:rgba(5,15,30,.55);position:relative}
+.tabs button{background:none;border:0;border-right:1px solid var(--line);color:var(--muted);text-align:left;padding:18px;cursor:pointer;font:600 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase}.tabs button i{display:block;color:var(--red);font-style:normal;margin-bottom:6px}.tabs .on{background:rgba(216,53,43,.18);color:#fff}
+/* ================= CARDS / GRIDS ================= */
+.hd{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end;margin-bottom:56px}.hd p{margin:0}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line);border-top:1px solid var(--line)}
+.g3>*{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px}
+.card img{height:150px;width:calc(100% + 52px);margin:-26px -26px 22px;object-fit:cover;filter:brightness(.8);transition:.5s}.card:hover img{transform:scale(1.03)}.card{overflow:hidden}
+.card i,.num{font:normal 11px var(--sans);color:var(--red);letter-spacing:.14em;display:block;margin-bottom:12px}.card h3{font-size:22px;margin-bottom:10px}.card p{font-size:13px}
+.co{overflow:hidden}.bgb{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(6px) brightness(.35);z-index:0}.co .w{position:relative;z-index:1}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}.cg img{margin-bottom:26px;height:280px;width:100%;object-fit:cover}
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--line);border-top:1px solid var(--line)}
+.sc a{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 24px 46px;position:relative;transition:.3s;min-height:130px}.sc a:hover{background:rgba(255,255,255,.04)}.sc a:after{content:"\2197";position:absolute;right:16px;bottom:14px;color:var(--red)}.sc h3{font-size:21px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.chip{border:1px solid var(--line);padding:6px 14px;font-size:12px;color:#c3ccdb}
+.two{display:grid;grid-template-columns:1fr 1fr;min-height:560px}.two img{width:100%;height:100%;object-fit:cover;filter:brightness(.8)}.two>div{padding:clamp(40px,7vw,100px);align-self:center}
+.si{display:grid;grid-template-columns:60px 1fr auto;gap:24px;padding:34px 0;border-top:1px solid var(--line);align-items:start}.si h3{margin-bottom:10px}
+.ls{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:40px}.ls.c3{grid-template-columns:repeat(3,1fr)}
+.ls h3{font-size:20px;margin-bottom:14px;padding-top:16px;border-top:1px solid var(--red)}.ls ul{list-style:none;padding:0;margin:0}.ls li{padding:9px 0;border-bottom:1px solid var(--line);color:#c3ccdb;font-size:14px}
+.pr{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;margin-top:36px}.pr div{border-top:1px solid var(--line);padding-top:18px}.pr h3{font-size:20px}.pr p{font-size:13px}
+.cta{background:var(--bg-deep);text-align:left}
+.pg{padding-top:190px;position:relative;overflow:hidden}
+.ol{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:20px}.ol a{border-top:1px solid var(--line);padding:16px 12px 16px 0;font:400 19px var(--serif)}.ol a i{font:normal 11px var(--sans);color:var(--red);margin-right:10px}.ol a:hover{color:var(--red)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:20px}.f{grid-column:1/-1}
+label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+input,select,textarea{width:100%;background:var(--panel);border:1px solid var(--line);color:#fff;padding:14px;font:15px var(--sans);border-radius:0}
+.ci p{margin-bottom:22px;color:var(--text)}.ci label{margin-bottom:2px}
+footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:70px 0 26px}
+.fg{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.4fr;gap:40px}footer img{height:112px;width:auto;margin-bottom:16px}footer h4{margin:0 0 16px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}footer ul{list-style:none;padding:0;margin:0}footer li{padding:5px 0;font-size:13px;color:var(--muted)}footer a:hover{color:#fff}
+.fb{display:flex;justify-content:space-between;margin-top:50px;padding-top:22px;border-top:1px solid var(--line);font-size:11px;color:#6d7b93;gap:12px;flex-wrap:wrap}
+.rv{opacity:0;transform:perspective(900px) translate3d(0,26px,0) rotateX(7deg);transform-origin:50% 100%;transition:opacity .8s,transform .9s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}}
+@media(max-width:1000px){.hg,.hd,.cg,.two,.fg{grid-template-columns:1fr}.g3,.ls,.ls.c3,.pr{grid-template-columns:1fr 1fr}.sc,.ol{grid-template-columns:1fr 1fr}.tabs{grid-template-columns:repeat(3,1fr)}.sl{height:50vh}.si{grid-template-columns:40px 1fr}.si a{grid-column:2}}
+@media(max-width:600px){.g3,.ls,.ls.c3,.pr,.sc,.ol,form{grid-template-columns:1fr}.btn{width:100%;justify-content:center}}
+
+.big{position:absolute;right:4%;top:110px;font:400 clamp(160px,22vw,340px)/1 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(160,180,210,.16);pointer-events:none;animation:fl 7s ease-in-out infinite alternate}@keyframes fl{to{transform:translateY(22px)}}
+.wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em}.wd>span{display:inline-block;animation:wu .9s cubic-bezier(.2,.8,.2,1) both;transition:color .3s}.wd:hover>span{color:var(--red)}@keyframes wu{from{transform:translateY(110%) rotate(4deg)}}
+.cur{position:fixed;inset:0;z-index:100;pointer-events:none;overflow:hidden}.cur i{position:absolute;inset:0;background:var(--bg-deep);transform:translateY(100%);border-top:3px solid var(--red)}.cur.go i{animation:cur .95s cubic-bezier(.77,0,.18,1)}@keyframes cur{0%{transform:translateY(100%)}45%,55%{transform:none}100%{transform:translateY(-100%)}}
+.ls li{transition:padding .3s,color .3s}.ls li:hover{padding-left:12px;color:#fff;border-color:var(--red)}.rv.in li{animation:li .6s both}@keyframes li{from{opacity:0;transform:translateX(-18px)}}
+.ls h3{position:relative;padding-top:16px}.ls h3:before{content:"";position:absolute;top:0;left:0;height:1px;width:0;background:var(--red);transition:width 1s .3s}.rv.in h3:before{width:100%}
+.card h3,.sc h3,.si h3,.ol a{transition:transform .35s,color .35s}.card:hover h3,.sc a:hover h3,.si:hover h3{transform:translateX(8px);color:#fff}.si{transition:background .3s}.si:hover{background:rgba(255,255,255,.03)}
+.lk{position:relative;display:inline-block}.lk:after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:0;background:var(--red);transition:width .35s}.lk:hover:after{width:100%}.btn{position:relative;overflow:hidden}
+.ol a:hover{transform:translateX(8px)}
+.tilt{transform-style:preserve-3d;will-change:transform}
+#si{position:fixed;right:22px;bottom:22px;width:60px;height:60px;border-radius:50%;background:var(--bg-deep);border:1px solid rgba(216,53,43,.45);z-index:45;cursor:pointer;padding:0;box-shadow:0 0 18px rgba(216,53,43,.18)}
+#si .o{position:absolute;inset:0;transition:transform .2s linear}#si .o i{position:absolute;left:50%;top:-5px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:var(--red);box-shadow:0 0 10px 3px rgba(216,53,43,.75),0 0 22px 6px rgba(216,53,43,.35);animation:gl 2.4s ease-in-out infinite alternate}@keyframes gl{from{opacity:.75}to{opacity:1;box-shadow:0 0 14px 5px rgba(216,53,43,.9),0 0 28px 9px rgba(216,53,43,.4)}}
+#si:after{content:"";position:absolute;left:50%;top:50%;width:2px;height:12px;margin:-6px 0 0 -1px;background:var(--text);opacity:.55;border-radius:2px;animation:sd 1.8s ease-in-out infinite}@keyframes sd{50%{transform:translateY(4px);opacity:.15}}
+@media(max-width:600px){#si{width:48px;height:48px;right:14px;bottom:14px}}
+
+/* ================= AMBIENT LIGHTING (purple-blue glow, streaks, particles) ================= */
+body{background:var(--bg)}body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(900px 620px at 88% -6%,rgba(109,125,255,.17),transparent 70%),radial-gradient(800px 600px at -8% 38%,rgba(138,99,255,.11),transparent 70%),radial-gradient(1000px 700px at 70% 105%,rgba(60,110,255,.12),transparent 70%)}
+body:after{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;opacity:.9;background:linear-gradient(112deg,transparent 42%,rgba(140,155,255,.05) 49%,transparent 56%),linear-gradient(112deg,transparent 62%,rgba(150,120,255,.04) 67%,transparent 72%),linear-gradient(112deg,transparent 18%,rgba(110,140,255,.035) 22%,transparent 26%);will-change:transform;animation:stk 26s ease-in-out infinite alternate}
+@keyframes stk{from{transform:translate3d(0,0,0)}to{transform:translate3d(-7%,0,0)}}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,footer{position:relative;z-index:1}
+header{box-shadow:0 1px 0 rgba(109,125,255,.18),0 10px 40px -18px rgba(109,125,255,.35)}
+.sub{box-shadow:0 18px 50px -12px rgba(0,0,0,.6),0 0 30px -6px var(--glow);border-color:rgba(109,125,255,.3)}
+.btn{box-shadow:0 0 0 rgba(109,125,255,0)}.btn:not(.r){box-shadow:0 0 16px -6px var(--glow),inset 0 0 12px -8px var(--glow)}.btn.r{box-shadow:0 0 22px -8px rgba(216,53,43,.55),0 0 26px -12px var(--neon)}
+.btn:hover{box-shadow:0 0 26px -4px var(--glow)}
+.card,.sc a,.si,.g3>div{transition:box-shadow .4s,background .4s,transform .35s}
+.card:hover,.sc a:hover{box-shadow:0 0 34px -10px var(--glow),inset 0 0 40px -28px var(--neon);background:rgba(109,125,255,.05)}
+.sl{box-shadow:0 0 0 1px rgba(109,125,255,.22),0 24px 70px -24px rgba(109,125,255,.45)}
+.tabs .on{background:linear-gradient(180deg,rgba(109,125,255,.16),rgba(216,53,43,.14));box-shadow:inset 0 -2px 0 var(--red),0 0 24px -8px var(--glow)}
+.chip{border-color:rgba(109,125,255,.3);box-shadow:0 0 14px -8px var(--glow);transition:.3s}.chip:hover{border-color:var(--neon);box-shadow:0 0 18px -4px var(--glow)}
+input:focus,select:focus,textarea:focus{border-color:var(--neon);box-shadow:0 0 0 1px var(--neon),0 0 22px -6px var(--glow);outline:none}
+.g3,.sc,.tk,.ls li,.si{border-color:rgba(130,150,230,.2)}
+.cta{background:radial-gradient(700px 320px at 15% 0,rgba(109,125,255,.14),transparent 70%),var(--bg-deep)}
+footer{background:radial-gradient(800px 260px at 50% 0,rgba(109,125,255,.1),transparent 70%),var(--bg-deep);border-top-color:rgba(109,125,255,.25)}
+.eb:before{box-shadow:0 0 8px var(--red)}
+.big{-webkit-text-stroke-color:rgba(130,150,255,.2)}
+.dd.o>a,nav a.n:hover,nav a.on{text-shadow:0 0 14px rgba(140,155,255,.6)}
+
+.bgs{position:absolute;inset:0;z-index:0;overflow:hidden}.bgs i{position:absolute;inset:-4%;background-size:cover;background-position:center;opacity:0;filter:blur(1.5px) brightness(.8);will-change:transform,opacity;animation:bgc 20s infinite}
+.bgs:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,12,28,.62),rgba(4,12,28,.42) 50%,rgba(4,12,28,.66))}
+@keyframes bgc{0%{opacity:0;transform:scale(1.04)}6%{opacity:1}25%{opacity:1}32%{opacity:0}100%{opacity:0;transform:scale(1.16)}}
+.co .w{z-index:1}
+.cur{position:fixed;inset:0;z-index:200;pointer-events:none;display:flex;visibility:hidden}.cur i{flex:1;background:linear-gradient(180deg,#0b2048,#040c1c);transform:scaleY(0);transform-origin:bottom;box-shadow:0 0 50px rgba(109,125,255,.35);border-right:1px solid rgba(109,125,255,.18);will-change:transform}
+.cur b{position:absolute;left:50%;top:50%;translate:-50% -50%;font:400 clamp(44px,8vw,96px) var(--serif);color:#e8ecf3;opacity:0;letter-spacing:.04em;text-shadow:0 0 30px rgba(109,125,255,.6)}.cur b:after{content:"";display:block;height:2px;background:var(--red);margin-top:8px;transform:scaleX(0);transform-origin:left}
+.cur.go,.cur.out{visibility:visible}.cur.go i{animation:cin .55s cubic-bezier(.76,0,.24,1) both;animation-delay:calc(var(--k)*.06s)}.cur.go b{animation:bin .6s .25s both}.cur.go b:after{animation:bl .6s .3s both}
+.cur.out i{transform:scaleY(1);transform-origin:top;animation:cout .65s cubic-bezier(.76,0,.24,1) both;animation-delay:calc(var(--k)*.06s)}.cur.out b{opacity:1;animation:bout .4s both}.cur.out b:after{transform:scaleX(1)}
+@keyframes cin{from{transform:scaleY(0)}to{transform:scaleY(1)}}@keyframes cout{from{transform:scaleY(1)}to{transform:scaleY(0)}}@keyframes bin{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1}}@keyframes bout{to{opacity:0;transform:translateY(-16px)}}@keyframes bl{to{transform:scaleX(1)}}
+#app.ent>section:first-child>.w,#app.ent>section:first-child .sl{animation:pin .9s .35s cubic-bezier(.2,.8,.2,1) both}@keyframes pin{from{opacity:0;transform:translate3d(0,36px,0) scale(.985)}}
+.hero h1{translate:calc(var(--mx,0)*-9px) calc(var(--my,0)*-7px)}.hero .sl{translate:calc(var(--mx,0)*11px) calc(var(--my,0)*8px)}
+html.cc,html.cc *{cursor:none!important}
+#cg,#cr,#cd,.ct{position:fixed;left:0;top:0;pointer-events:none;z-index:9999;opacity:0;will-change:transform}
+#cg{width:200px;height:200px;margin:-100px 0 0 -100px;background:radial-gradient(closest-side,rgba(125,100,255,.24),rgba(80,110,255,.08) 55%,transparent);z-index:9990}
+#cr{width:42px;height:42px;margin:-21px 0 0 -21px;border:1px solid rgba(150,120,255,.55);border-radius:50%;box-shadow:0 0 14px -2px rgba(130,100,255,.45),inset 0 0 10px -4px rgba(109,125,255,.4);transition:scale .3s,border-color .3s,opacity .3s;animation:cp 2.6s ease-in-out infinite}
+#cr.h{scale:1.55;border-color:rgba(190,160,255,.85)}#cr.d{scale:.8}@keyframes cp{50%{box-shadow:0 0 20px 0 rgba(140,110,255,.6),inset 0 0 12px -3px rgba(109,125,255,.55)}}
+#cd{width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:radial-gradient(#e3d6ff,#9d7bff);box-shadow:0 0 10px 3px rgba(150,110,255,.85),0 0 24px 7px rgba(109,125,255,.45)}
+.ct{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:rgba(150,120,255,.6);box-shadow:0 0 8px 2px rgba(130,100,255,.4);z-index:9980}
+@media(hover:none),(pointer:coarse){.big{display:none}.cur i{box-shadow:none}}
+@media(max-width:700px){.hero{padding-top:150px}.sl{height:46vh}.card,.sc a{transition:none}}
+
+/* ===== v6 refinements: reference layout, calm transitions, crisp images ===== */
+:root{--bg:#061f40}
+.wx,header .w{max-width:1800px;padding:0 clamp(20px,4.9vw,94px)}
+header{background:rgba(6,31,64,.98)}
+header .w{height:100px}header img{height:100px}.lg:before{inset:0 -12px}
+.hero{padding:148px 0 56px}.hg{grid-template-columns:.975fr 1fr;gap:0}.hg>div:first-child{padding-right:48px}
+.hero h1,.pg h1{font-size:clamp(38px,3.45vw,68px);line-height:1.04}.pg h1{font-size:clamp(36px,3.2vw,60px)!important;max-width:none!important}
+.hero p,.pg .hg p{font-size:16px;max-width:600px;color:#c3ccdb}
+.sl{height:min(570px,calc(100svh - 200px));min-height:340px}
+.pg{padding-top:148px}.pg .hg{align-items:center}
+.cap{left:30px;right:30px;bottom:40px}.cap b{font-size:22px;margin-bottom:8px;color:#d3d9e6}.cap span{font-size:11.5px;max-width:none;letter-spacing:.02em}
+.dt{right:26px;bottom:24px}.dt button{width:26px;height:10px}.dt button:after{inset:4px 0}
+.ar{opacity:0;transition:opacity .3s}.sl:hover .ar{opacity:1}
+.sl .s,.sl[data-v] .s{clip-path:none!important;opacity:0;transition:opacity .9s ease;z-index:1}.sl .s.on{opacity:1;z-index:2}.sl .s.pv{opacity:1;transition:none;z-index:1}
+.sl img{transform:scale(1.06)}.sl .s.on img{transform:none;transition:transform 4.5s ease-out}
+.hero h1{translate:calc(var(--mx,0)*-3px) calc(var(--my,0)*-2px)}.hero .sl{translate:calc(var(--mx,0)*4px) calc(var(--my,0)*3px)}
+.cs{height:150px;width:calc(100% + 52px);margin:-26px -26px 22px}.cs .ar,.cs .cap,.cs .dt{display:none}.card .cs img{height:100%;width:100%;margin:0}.card:hover .cs img{transform:none}
+.cg .sl{height:300px;margin-bottom:26px}.cg-sl .cap{display:none}.two .sl{height:100%;min-height:560px}
+.bgs i{filter:none}.bgs:after{background:linear-gradient(180deg,rgba(4,12,28,.72),rgba(4,12,28,.56) 50%,rgba(4,12,28,.74))}
+.dv .bg{filter:brightness(.5)}
+.cur{display:block;background:var(--bg-deep);opacity:0;visibility:hidden}.cur i{display:none}
+.cur b{position:absolute;left:0;top:0;width:100%;height:3px;translate:0;opacity:1;background:linear-gradient(90deg,var(--red),var(--neon2),var(--neon));transform:scaleX(0);transform-origin:left;font-size:0;box-shadow:0 0 14px rgba(138,99,255,.7)}.cur b:after{display:none}
+.cur.go{visibility:visible;animation:vin .3s ease both}.cur.go b{animation:bar .7s cubic-bezier(.6,0,.2,1) both}.cur.out{visibility:visible;animation:vout .5s ease both}.cur.out b{transform:scaleX(1);animation:none;opacity:0;transition:opacity .4s}
+@keyframes vin{to{opacity:1}}@keyframes vout{from{opacity:1}to{opacity:0}}@keyframes bar{to{transform:scaleX(1)}}
+#app.ent>section:first-child>.w{animation:pin .8s .3s cubic-bezier(.2,.8,.2,1) both}#app.ent .sl{animation:none}
+@media(max-width:1000px){.hg{grid-template-columns:1fr;gap:36px}.hg>div:first-child{padding-right:0}nav{inset:100px 0 0}.sl{height:46vh}.two .sl{min-height:320px}.big{display:none}}
+@media(max-width:700px){header .w{height:84px}header img{height:68px}nav{inset:84px 0 0}.hero{padding-top:118px}.pg{padding-top:118px}.cg .sl{height:220px}}
+
+header img,footer img{background:#fff;padding:5px 8px;border-radius:3px;height:88px;width:auto;box-shadow:0 0 0 1px rgba(255,255,255,.25),0 6px 24px -8px rgba(0,0,0,.5)}
+footer img{height:100px}.lg:before{display:none}
+@media(max-width:700px){header img{height:66px;padding:4px 6px}}
+
+/* ===== v7: transparent logo + starry header ===== */
+header{background:radial-gradient(520px 150px at 7% 50%,rgba(109,125,255,.2),transparent 70%),radial-gradient(700px 160px at 92% 0,rgba(138,99,255,.12),transparent 70%),#061f40}
+header:before,header:after{content:"";position:absolute;inset:0;pointer-events:none;animation:tw 4.2s ease-in-out infinite alternate}
+header:before{background:radial-gradient(circle at 4% 28%,rgba(255,255,255,0.9) 0,transparent 1.6px),radial-gradient(circle at 9% 72%,rgba(255,255,255,0.7) 0,transparent 1.2px),radial-gradient(circle at 15% 20%,rgba(255,255,255,0.8) 0,transparent 1.4px),radial-gradient(circle at 22% 64%,rgba(255,255,255,0.6) 0,transparent 1.1px),radial-gradient(circle at 29% 35%,rgba(255,255,255,0.85) 0,transparent 1.5px),radial-gradient(circle at 36% 78%,rgba(255,255,255,0.6) 0,transparent 1.2px),radial-gradient(circle at 44% 24%,rgba(255,255,255,0.7) 0,transparent 1.3px),radial-gradient(circle at 52% 70%,rgba(255,255,255,0.8) 0,transparent 1.5px),radial-gradient(circle at 61% 30%,rgba(255,255,255,0.6) 0,transparent 1.1px),radial-gradient(circle at 70% 80%,rgba(255,255,255,0.75) 0,transparent 1.3px),radial-gradient(circle at 79% 22%,rgba(255,255,255,0.85) 0,transparent 1.5px),radial-gradient(circle at 88% 66%,rgba(255,255,255,0.6) 0,transparent 1.2px),radial-gradient(circle at 95% 34%,rgba(255,255,255,0.8) 0,transparent 1.4px)}header:after{background:radial-gradient(circle at 6% 55%,rgba(255,255,255,0.8) 0,transparent 1.3px),radial-gradient(circle at 12% 85%,rgba(255,255,255,0.6) 0,transparent 1.1px),radial-gradient(circle at 19% 40%,rgba(255,255,255,0.9) 0,transparent 1.6px),radial-gradient(circle at 26% 15%,rgba(255,255,255,0.6) 0,transparent 1.1px),radial-gradient(circle at 33% 60%,rgba(255,255,255,0.7) 0,transparent 1.3px),radial-gradient(circle at 40% 88%,rgba(255,255,255,0.8) 0,transparent 1.4px),radial-gradient(circle at 48% 45%,rgba(255,255,255,0.6) 0,transparent 1.1px),radial-gradient(circle at 57% 14%,rgba(255,255,255,0.85) 0,transparent 1.5px),radial-gradient(circle at 66% 58%,rgba(255,255,255,0.7) 0,transparent 1.2px),radial-gradient(circle at 74% 42%,rgba(255,255,255,0.8) 0,transparent 1.4px),radial-gradient(circle at 83% 86%,rgba(255,255,255,0.6) 0,transparent 1.1px),radial-gradient(circle at 91% 18%,rgba(255,255,255,0.85) 0,transparent 1.5px),radial-gradient(circle at 98% 62%,rgba(255,255,255,0.7) 0,transparent 1.2px);animation-delay:-2.1s;animation-duration:5.4s}
+@keyframes tw{from{opacity:.15}to{opacity:1}}
+header .w{position:relative;z-index:1}
+header img,footer img{background:transparent;padding:0;border-radius:0;box-shadow:none;height:100px;width:auto;filter:drop-shadow(0 0 7px rgba(205,218,255,.3))}
+footer img{height:104px}.lg:before{display:block;inset:-4px -14px;background:radial-gradient(closest-side,rgba(205,218,255,.13),transparent)}
+@media(max-width:700px){header img{height:68px;padding:0}}
+
+/* ===== v8: plain footer logo + readable text over image backgrounds ===== */
+footer img{filter:none;box-shadow:none;background:transparent;height:100px}
+.bgs i{filter:blur(5px) brightness(.72)}
+.bgs:after{background:linear-gradient(180deg,rgba(4,12,28,.8),rgba(4,12,28,.7) 50%,rgba(4,12,28,.82))}
+.dv .bg{inset:-24px;filter:blur(3px) brightness(.45)}
+.dv:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,12,28,.35),rgba(4,12,28,.6));pointer-events:none}
+.dv .w,.dv .tabs{z-index:2}
+.co h1,.co h2,.co h3,.co .eb,.dv h2,.dv .eb{text-shadow:0 2px 16px rgba(4,12,28,.85)}
+.co p,.dv p{color:#d6dcea;text-shadow:0 1px 10px rgba(4,12,28,.9)}
+.co .num{text-shadow:0 1px 8px rgba(4,12,28,.9)}
+
+/* ===== v9: hero heading size/weight to match reference ===== */
+.hero h1{font-weight:700;font-size:clamp(38px,3.34vw,66px);line-height:1;letter-spacing:-.005em}.hero h1 em{font-weight:700}
+@media(max-width:700px){.hero h1{font-size:clamp(36px,10vw,46px);line-height:1.04}}
+
+/* ===== v10: consistent bold headings, 3-line hero heading like the reference ===== */
+h1,h2,h3{font-weight:700}h1 em,h2 em,h3 em{font-weight:700}
+.hero h1,.pg h1{font-size:clamp(38px,3.34vw,66px)!important;line-height:1.02;max-width:none!important}
+.pg h1{font-size:clamp(36px,3.34vw,64px)!important}
+@media(max-width:700px){.dbr{display:none}.hero h1{font-size:clamp(34px,9.6vw,44px)!important}.pg h1{font-size:clamp(32px,9vw,42px)!important}}
+
+/* ===== v11: reference spacing (wider content, spaced footer, bigger headings, SVG arrows) ===== */
+.w{max-width:none;padding:0 clamp(20px,8.9vw,190px)}
+.wx,header .w{max-width:1900px;padding:0 clamp(20px,4.9vw,94px)}
+.wf{max-width:1900px;margin:0 auto;padding:0 clamp(20px,3.7vw,90px)}
+h2{font-size:clamp(34px,4.2vw,80px);line-height:1.04}
+.cta{padding:clamp(70px,7vw,110px) 0}
+.cta h2{font-size:clamp(34px,3.6vw,72px);line-height:1;max-width:14.4em}
+.cta p{font-size:16px;max-width:560px;margin-top:26px}
+.cg{grid-template-columns:.78fr 1fr;gap:0}.cg>div:first-child{padding-right:56px}
+.ai{display:inline-block;flex:none;margin-left:10px;vertical-align:-1px}.lk .ai{margin-left:8px}
+.btn{padding:17px 24px;gap:6px}
+footer{padding:clamp(60px,6vw,96px) 0 28px}
+.fg{grid-template-columns:1.3fr .98fr 1.14fr 1.05fr;gap:0}
+.fg h4{margin:0 0 26px;font-size:10.5px;letter-spacing:.2em}
+.fg li{padding:7px 0;font-size:14px;line-height:1.4}
+.fg>div:first-child p{font-size:13px;max-width:300px;margin-top:22px;line-height:1.9}
+footer img{height:104px}
+.fc li{display:flex;gap:14px;align-items:flex-start}.fi{flex:none;margin-top:3px;color:var(--muted)}
+.fc .ad h4{margin:0 0 6px;font-size:10px;letter-spacing:.2em}.fc .ad div{line-height:1.7;color:var(--muted);max-width:340px}
+.fb{margin-top:60px}
+@media(max-width:1000px){.fg{grid-template-columns:1fr 1fr;gap:40px 24px}.fg>div:first-child{grid-column:1/-1}.cg{grid-template-columns:1fr}.cg>div:first-child{padding-right:0}.cta h2{max-width:none}}
+@media(max-width:600px){.fg{grid-template-columns:1fr}.w{padding:0 22px}}
+
+/* ===== v12: hero fills the screen like the reference + premium slider transition ===== */
+.hero{display:block;min-height:0;padding:139px 0 34px}
+.hero .w{width:100%}
+.sl .s,.sl[data-v] .s{opacity:0;transform:translate3d(52px,0,0);transition:opacity .85s ease,transform 1.05s cubic-bezier(.22,1,.36,1);z-index:1}
+.sl .s.on{opacity:1;transform:none;z-index:2}
+.sl .s.pv{opacity:1;transform:translate3d(-52px,0,0);transition:transform 1.05s cubic-bezier(.22,1,.36,1);z-index:1}
+.sl img{transform:scale(1.14)}.sl .s.on img{transform:none;transition:transform 4.2s cubic-bezier(.2,.6,.2,1)}
+.sl .cap{opacity:1;transform:none;transition:none}
+.sl .cap b,.sl .cap span{display:block;opacity:0;transform:translate3d(0,16px,0);transition:opacity .6s,transform .7s cubic-bezier(.22,1,.36,1)}
+.sl .s.on .cap b{opacity:1;transform:none;transition-delay:.35s}.sl .s.on .cap span{opacity:1;transform:none;transition-delay:.52s}
+.sh{position:absolute;inset:0;z-index:5;pointer-events:none;background:linear-gradient(105deg,transparent 36%,rgba(255,255,255,.17) 50%,transparent 64%);transform:translateX(-115%)}
+.sh.go{animation:shn 1s cubic-bezier(.4,0,.2,1)}@keyframes shn{to{transform:translateX(115%)}}
+.cn{position:absolute;top:20px;right:24px;z-index:6;font-size:11px;letter-spacing:.2em;color:rgba(232,236,243,.75);text-shadow:0 1px 8px rgba(4,12,28,.8)}.cn b{font:700 15px var(--serif);color:#fff;letter-spacing:.08em}
+.cs .cn,.cs .sh{display:none}
+.dt button.on:before{content:"";position:absolute;left:0;top:4px;height:2px;background:var(--red);animation:fill var(--iv,2.3s) linear forwards}
+.dt button.on:after{background:rgba(255,255,255,.3)}@keyframes fill{from{width:0}to{width:100%}}
+.hero .sl:before,.hero .sl:after{content:"";position:absolute;width:28px;height:28px;z-index:6;pointer-events:none}
+.hero .sl:before{left:14px;top:14px;border-left:2px solid var(--red);border-top:2px solid var(--red)}.hero .sl:after{right:14px;bottom:14px;border-right:2px solid var(--red);border-bottom:2px solid var(--red)}
+@media(max-width:1000px){.hero{padding-top:120px}}
+@media(max-width:700px){.hero{padding-top:110px}.cn{top:14px;right:16px}}
+
+.dd.x:hover .sub,.dd.x:focus-within .sub{opacity:0;visibility:hidden;transform:translateY(6px);transition-delay:0s}
+
+/* ===== v13: footer spacing ===== */
+.wf{padding:0 clamp(20px,5.4vw,112px)}
+.fg{grid-template-columns:1.4fr .7fr 1fr 1.28fr}
+@media(max-width:1000px){.fg{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.fg{grid-template-columns:1fr}}</style><link rel="canonical" href="https://ajengineeringsolutions.com/gem/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#061f40">
 <meta property="og:type" content="website"><meta property="og:site_name" content="A&amp;J Engineering Solutions"><meta property="og:title" content="GeM &amp; Government Procurement Support | Catalogue &amp; Tenders | A&amp;J Engineering Solutions"><meta property="og:description" content="Support for GeM cataloguing, product onboarding, government procurement requirements and tender-related activities for businesses and organizations."><meta property="og:url" content="https://ajengineeringsolutions.com/gem/"><meta property="og:image" content="https://ajengineeringsolutions.com/assets/meeting.jpg"><meta property="og:locale" content="en_IN">
@@ -40,4 +292,163 @@
 <li class="ad"><svg class="fi" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><h4>Head Office</h4>No. 75, Fatima Manzil, 7th Main Road, 5th Cross, Subhana Garden, Vijayanagar, Bangalore 560 040</div></li>
 <li class="ad"><svg class="fi" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><h4>Branch Office</h4>Sundrewala, Near Primary School, Raipur Road, Dehradun (Uttarakhand)</div></li></ul></div></div>
 <div class="fb"><span>© 2026 A&amp;J Engineering Solutions. All Rights Reserved.</span><span><a href="/">Privacy Policy</a> | <a href="/">Terms of Use</a></span></div></div></footer>
-<script src="/assets/site.js?v=muq34ssp" defer></script></body></html>
+<script id="site-js">/* ================= CONTENT DATA (EDIT TEXT HERE) ================= */
+const A=n=>'/assets/'+n; // IMAGE PATHS: drop your own files into /assets and edit names below
+const SV=[
+{id:'staffing',n:'01',nav:'Staffing Solutions',tab:'Staffing Solutions',cap:'Staffing & Technical Manpower',img:['team.jpg','design.jpg','meeting-team.jpg'],
+ core:'Our core strength — engineering, IT and technical professionals supplied for project, contract, deputation and long-term operational requirements across India.',
+ all:'Staffing is where A&J started and where we are strongest. Finding the right technical professionals can be as important as finding the right technology, so every mandate is built around the exact role, skill level, location and timeline you are working with.',
+ chips:['Engineering Professionals','IT Professionals','Technical Specialists','Project Resources','Support Staff'],
+ lab:'01 / SERVICE - Staffing Solutions',h:'Skilled People. Right Capability.',
+ secs:[['Resource Categories',['Engineering Professionals','IT Professionals','Technical Specialists','Project Resources','Support Staff','Contract / Deputation Resources']],['Engagement Models',['Project-based staffing','Contract staffing','Deputation / on-site resources','Long-term operational teams','Temp-to-permanent hiring','Bulk / volume mobilisation']],['Functional Domains',['Mechanical & production','Electrical & electronics','Design, CAD & drafting','Quality & inspection','IT, networking & support','Project & site coordination']],['What You Get From Us',['Screened, requirement-matched profiles','Fast turnaround on shortlists','Documentation & onboarding support','Replacement coordination','Single point of contact','Ongoing engagement reviews']]],
+ note:'Whether you need a single specialist for a short assignment or a full technical team on deputation, our staffing model is configured around your requirement — not the other way round.',cta:'Share staffing requirement'},
+{id:'it',n:'02',nav:'IT & Digital Solutions',tab:'IT & Digital Solutions',cap:'IT & Digital Solutions',img:['datacenter.jpg','itsupport.jpg','controlroom.jpg'],
+ core:'End-to-end IT infrastructure and technology solutions including computing systems, servers, software, networking and enterprise IT requirements.',
+ all:'A&J provides IT infrastructure and technology solutions designed to support modern organizations, projects and operational environments.',
+ chips:['Desktops','Laptops','Workstations','All-in-one PCs'],lab:'02 / SERVICE',h:'IT & Digital Solutions',
+ secs:[['Computing Infrastructure',['Desktops','Laptops','Workstations','All-in-one PCs']],['Servers & Infrastructure',['Servers','Storage','Networking','Infrastructure components']],['Software Solutions',['Enterprise software','Productivity solutions','Technical software','Licensing support']],['IT Support',['Installation','Configuration','Deployment','Technical support']]],cta:'Discuss your IT requirement'},
+{id:'defence-engineering',n:'03',nav:'Defence & Engineering Solutions',tab:'Defence & Engineering',cap:'Defence & Engineering Solutions',img:['hangar.jpg','cnc.jpg','meeting-screen.jpg'],
+ core:'Technology and engineering support for organizations operating in demanding and mission-critical environments.',
+ all:'A&J Engineering Solutions supports organizations operating in technically demanding and mission-critical environments through technology, engineering support and skilled manpower capabilities.',
+ chips:['Engineering Support','Technical Manpower','IT & Computing Infrastructure','Software & Technology Solutions','Project Support'],lab:'03 / SERVICE',h:'Supporting India’s Defence & Engineering Ecosystem',
+ secs:[['Capabilities',['Engineering Support','Technical Manpower','IT & Computing Infrastructure','Software & Technology Solutions','Project Support','Technical Procurement']]],cta:'Discuss a project'},
+{id:'gem',n:'04',nav:'GeM & Government Procurement',tab:'GeM & Procurement',cap:'GeM & Government Procurement',img:['warehouse.jpg','blueprint.jpg','meeting.jpg'],
+ core:'Support for GeM cataloguing, product onboarding, government procurement requirements and tender-related activities.',
+ all:'We support businesses and organizations navigating government procurement requirements, including GeM-related activities and tender-oriented processes.',
+ chips:['GeM catalogue setup','Product listing support','Product documentation','OEM documentation support','Tender identification'],lab:'04 / SERVICE',h:'GeM & Government Procurement Solutions',
+ secs:[['Services',['GeM catalogue setup','Product listing support','Product documentation','OEM documentation support','Tender identification','Tender documentation support','Procurement process coordination','Government marketplace support']]],note:'Our team provides professional procurement support based on the specific requirements of each engagement.',cta:'Get procurement support'},
+{id:'amc',n:'05',nav:'AMC & Technical Support',tab:'AMC & Technical Support',cap:'AMC & Technical Support',img:['hardware.jpg','meeting-glass.jpg','technician.jpg'],
+ core:'Reliable maintenance and technical support services designed to keep critical IT and technology infrastructure operational.',
+ all:'A&J provides maintenance and technical support services designed to help organizations maintain the reliability and continuity of their technology infrastructure.',
+ chips:['IT hardware AMC','Preventive maintenance','Breakdown support','Installation & configuration','Troubleshooting'],lab:'05 / SERVICE',h:'Keep Your Infrastructure Running',
+ secs:[['Services',['IT hardware AMC','Preventive maintenance','Breakdown support','Installation & configuration','Troubleshooting','Technical assistance','Infrastructure support']]],cta:'Request support'}];
+const PSU_TXT='A&J Engineering Solutions supports requirements across Defence, Aerospace, Government and Public Sector environments through integrated technology, engineering, manpower and procurement capabilities.';
+const X={};
+const ALL=[...SV.map(s=>({id:s.id,t:s.tab,d:s.id=='staffing'||1?s.core:''})),{id:'psu',t:'Defence & PSU',d:PSU_TXT}];
+const $=s=>document.querySelector(s),app=$('#app');
+const chips=a=>`<div class="chips">${a.map(x=>`<span class="chip">${x}</span>`).join('')}</div>`;
+const em=(t,w)=>t.replace(w,`<em>${w}</em>`);
+const ctaBand=(h,b1='Submit your requirement',b2='Contact A&J')=>`<section class="cta"><div class="w rv"><h2 style="max-width:720px">${h}</h2><p style="margin-top:22px;max-width:520px">Tell us what you need. Our team will understand your requirement and connect you with the appropriate solution.</p><div class="row"><a class="btn r" href="/requirement/">${b1} <svg class="ai" viewBox="0 0 11 11" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 10L10 1M3 1h7v7"/></svg></a><a class="btn" href="/contact/">${b2} <svg class="ai" viewBox="0 0 11 11" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 10L10 1M3 1h7v7"/></svg></a></div></div></section>`;
+/* ================= SLIDER (touch swipe, arrows, dots) ================= */
+function slider(el,list,ms){el.innerHTML=list.map((x,i)=>`<${x.href?'a href="'+x.href+'"':'div'} class="s${i?'':' on'}"><img src="${A(x.img)}" alt="${x.t}" decoding="async"${i?' loading="lazy"':''}>${x.d?`<div class="cap"><b>${x.t}</b><span>${x.d}</span></div>`:''}</${x.href?'a':'div'}>`).join('')+'<i class="sh"></i><div class="cn"><b>01</b> / '+String(list.length).padStart(2,'0')+'</div><button class="ar l" aria-label="Previous">&#8592;</button><button class="ar r" aria-label="Next">&#8594;</button><div class="dt">'+list.map((x,i)=>`<button aria-label="Slide ${i+1}"${i?'':' class="on"'}></button>`).join('')+'</div>';
+const s=[...el.querySelectorAll('.s')],d=[...el.querySelectorAll('.dt button')];let c=0,t,x0=0;const sh=el.querySelector('.sh'),cb=el.querySelector('.cn b');el.style.setProperty('--iv',ms+'ms');
+const go=n=>{n=(n+s.length)%s.length;if(n==c)return;const o=c;el.dataset.v=n%4;s[o].classList.replace('on','pv');c=n;s[c].classList.remove('pv');void s[c].offsetWidth;s[c].classList.add('on');d.forEach((b,i)=>b.classList.toggle('on',i==c));cb.textContent=String(c+1).padStart(2,'0');sh.classList.remove('go');void sh.offsetWidth;sh.classList.add('go');setTimeout(()=>s[o].classList.remove('pv'),1100)};
+const run=()=>{clearInterval(t);t=setInterval(()=>{if(!el.isConnected)return clearInterval(t);go(c+1)},ms)};
+d.forEach((b,i)=>b.onclick=()=>{go(i);run()});el.querySelector('.l').onclick=()=>{go(c-1);run()};el.querySelector('.r').onclick=()=>{go(c+1);run()};
+el.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});el.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){go(c+(dx<0?1:-1));run()}});
+el.onmouseenter=()=>clearInterval(t);el.onmouseleave=run;run()}
+const sliderEl=(list,ms=3200,st='')=>{const e=document.createElement('div');e.className='sl';e.style.cssText=st;slider(e,list,ms);return e};
+/* ================= PAGES ================= */
+const SITE='https://ajengineeringsolutions.com';
+const SEO={
+'/':{t:'A&J Engineering Solutions | IT Services, Manpower & GeM Support',d:'A&J Engineering Solutions provides integrated technology, engineering, staffing, manpower and procurement solutions for businesses, government organizations, defence establishments and public-sector enterprises. Offices in Bangalore and Dehradun.'},
+'/about':{t:'About A&J Engineering Solutions | Technology, Engineering & People',d:'A&J Engineering Solutions is an India-based technology and engineering solutions company providing integrated services across IT infrastructure, engineering support, technical manpower, defence-oriented requirements and government procurement.'},
+'/services':{t:'Our Services | Staffing, IT, Defence Engineering, GeM & AMC | A&J Engineering Solutions',d:'Staffing and technical manpower, IT and digital solutions, defence and engineering solutions, GeM and government procurement support, and AMC and technical support from A&J Engineering Solutions.'},
+'/staffing':{t:'Staffing & Technical Manpower Services | A&J Engineering Solutions',d:'Engineering, IT and technical professionals supplied for project, contract, deputation and long-term operational requirements across India. Manpower services for businesses, government and PSU organizations.'},
+'/it':{t:'IT Hardware, Servers & Networking Services | A&J Engineering Solutions',d:'End-to-end IT infrastructure and technology solutions including computing systems, servers, software, networking and enterprise IT requirements. Offices in Bangalore and Dehradun.'},
+'/defence-engineering':{t:'Defence & Engineering Solutions | A&J Engineering Solutions',d:'Technology and engineering support for organizations operating in demanding and mission-critical environments, including defence and aerospace requirements.'},
+'/gem':{t:'GeM & Government Procurement Support | Catalogue & Tenders | A&J Engineering Solutions',d:'Support for GeM cataloguing, product onboarding, government procurement requirements and tender-related activities for businesses and organizations.'},
+'/amc':{t:'AMC & Technical Support | IT Hardware Maintenance | A&J Engineering Solutions',d:'Reliable maintenance and technical support services designed to keep critical IT and technology infrastructure operational: IT hardware AMC, preventive maintenance and breakdown support.'},
+'/psu':{t:'Defence & PSU Solutions | A&J Engineering Solutions',d:'Technology, engineering, manpower and procurement capabilities for Defence, Aerospace, Government and Public Sector environments.'},
+'/contact':{t:'Contact A&J Engineering Solutions | Bangalore & Dehradun',d:'Contact A&J Engineering Solutions for project, manpower, technology or procurement requirements. Head Office in Bangalore and Branch Office in Dehradun, Uttarakhand.'},
+'/requirement':{t:'Submit Your Requirement | A&J Engineering Solutions',d:'Tell us what you need. Our team will understand your requirement and connect you with the appropriate solution.'}};
+const bgs=l=>`<div class="bgs" aria-hidden="true">${l.map((x,k)=>`<i style="background-image:url(${A(x)});animation-delay:${k*5}s"></i>`).join('')}</div>`;
+const HV=matchMedia('(hover:hover)').matches;
+const P={};
+P['/']=()=>{const first=SV[0];return `<section class="hero"><div class="w wx"><div class="hg"><div><div class="eb">A&amp;J Engineering Solutions</div><h1>Staffing &amp;<br class="dbr"> Engineering solutions<br class="dbr"> for <em>All industries.</em></h1><p>A&J Engineering Solutions provides integrated technology, engineering, staffing, manpower and procurement solutions for businesses, government organizations, defence establishments and public-sector enterprises.</p><div class="row"><a class="btn r" href="/services/">Explore our services <svg class="ai" viewBox="0 0 11 11" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 10L10 1M3 1h7v7"/></svg></a><a class="lk" href="/contact/">Talk to our team &#8250;</a></div></div><div id="hs"></div></div></div></section>
+<div class="w wx"><div class="tk"><span>Engineering</span><span>Technology</span><span>Staffing</span><span>Procurement</span><span>Support</span></div></div>
+<section class="dv" id="dv">${ALL.map((x,i)=>`<div class="bg${i?'':' on'}" style="background-image:url(${A(['meeting.jpg','controlroom.jpg','hangar.jpg','warehouse.jpg','cnc.jpg','blueprint.jpg'][i])})"></div>`).join('')}<div class="w"><div class="tx"><div class="eb" id="dn">01 / What we deliver</div><h2 id="dt"></h2><p id="dd" style="margin-top:18px"></p><a class="lk" id="dl" href="/"></a></div></div><div class="tabs">${ALL.map((x,i)=>`<button data-i="${i}" class="${i?'':'on'}"><i>0${i+1}</i>${x.t}</button>`).join('')}</div></section>
+<section><div class="w"><div class="hd rv"><div><div class="eb">02 / What we do</div><h2>Our Core <em>Capabilities</em></h2></div><p>Integrated solutions designed around the evolving requirements of technology-driven organizations.</p></div>
+<div class="g3">${SV.map((s,i)=>`<article class="card rv"><div class="sl cs" data-sl="${[...s.img,...(X[s.id]||[])].join(',')}" data-t="${s.cap}"></div><i>0${i+1}</i><h3>${s.cap}</h3><p>${s.core}</p><a class="lk" href="/${s.id}/">Learn more <svg class="ai" viewBox="0 0 11 11" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 10L10 1M3 1h7v7"/></svg></a></article>`).join('')}</div></div></section>
+<section class="co">${bgs(['meeting.jpg','meeting-glass.jpg','meeting-team.jpg','meeting-screen.jpg'])}<div class="w"><div class="cg"><div class="rv"><div class="eb">03 / Company</div><h2>Building Solutions That Move <em>Missions Forward</em></h2></div><div class="rv"><div class="sl cg-sl" data-sl="meeting.jpg,meeting-team.jpg,meeting-screen.jpg,meeting-glass.jpg" data-t="A&J team meeting"></div><p style="color:var(--text);font-size:17px">At A&J Engineering Solutions, we bring together technology, engineering expertise, skilled professionals and procurement capabilities to help organizations execute critical requirements efficiently.</p><p>From IT infrastructure and technical manpower to defence-oriented engineering support, government procurement and GeM services, our approach is built around reliability, responsiveness and long-term partnerships.</p><p>We work closely with our clients to understand their requirements and deliver solutions that align with their operational objectives.</p><a class="btn" href="/about/">Discover A&J <svg class="ai" viewBox="0 0 11 11" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 10L10 1M3 1h7v7"/></svg></a></div></div></div></section>
+<section><div class="w"><div class="hd rv"><div><div class="eb">04 / Why A&amp;J</div><h2>Why Choose <em>A&amp;J?</em></h2></div><p>A requirement-first approach, backed by technical depth and responsive coordination.</p></div>
+<div class="g3">${[['Requirement Driven','We begin by understanding the requirement before developing the solution.'],['Technical Capability','Our approach combines engineering understanding with technology expertise.'],['Skilled Professionals','Access to technical and professional manpower across multiple domains.'],['Government Procurement Experience','Familiarity with GeM and government procurement processes.'],['Responsive Support','Clear communication and responsive coordination throughout the engagement.'],['Long-Term Partnership','We aim to build relationships that extend beyond individual projects.']].map((x,i)=>`<div class="rv"><span class="num">0${i+1}</span><h3>${x[0]}</h3><p style="margin-top:10px;font-size:13px">${x[1]}</p></div>`).join('')}</div></div></section>
+<section class="co">${bgs(['hangar.jpg','controlroom.jpg','cnc.jpg','blueprint.jpg'])}<div class="w"><div class="hd rv"><div><div class="eb">05 / Sectors</div><h2>Industries &amp; Sectors <em>We Support</em></h2></div><p>Our capabilities can be configured according to the technical, operational and procurement requirements of each engagement.</p></div>
+<div class="sc">${['Defence & Aerospace','Government & PSU','IT & Technology','Engineering','Infrastructure','Enterprise'].map((x,i)=>`<a href="/contact/"><span class="num">0${i+1}</span><h3>${x}</h3></a>`).join('')}</div></div></section>
+<section style="padding:0"><div class="two"><div class="sl" data-sl="controlroom.jpg,hangar.jpg,cnc.jpg,blueprint.jpg" data-t="Mission-critical technology and engineering support"></div><div class="rv"><div class="eb">06 / Experience</div><h2>Supporting <em>Mission-Critical</em> Requirements</h2><p style="margin-top:24px">Our team brings experience across technology, engineering, government procurement and technical manpower requirements, with exposure to organizations and ecosystems associated with Defence, Aerospace, Government and Public Sector environments.</p><div class="eb" style="color:var(--red);margin-top:30px">Selected Areas of Engagement</div>${chips(['Defence Technology','IT Infrastructure','Engineering Support','Technical Manpower','Government Procurement','GeM'])}</div></div></section>
+${ctaBand('Have a Requirement? Let’s Build the Right Solution.')}`};
+P['/about']=()=>`<section class="pg"><div class="w"><div class="eb">About A&amp;J</div><h1>About A&amp;J <em>Engineering Solutions</em></h1><p style="font-size:19px;margin-top:20px">Technology. Engineering. People. One integrated approach.</p></div></section>
+<section style="padding-top:0"><div class="w"><div class="cg"><div class="rv"><div class="eb">01 / Profile</div><h2>Who <em>We Are?</em></h2></div><div class="rv"><p style="color:var(--text);font-size:17px">A&J Engineering Solutions is an India-based technology and engineering solutions company providing integrated services across IT infrastructure, engineering support, technical manpower, defence-oriented requirements and government procurement.</p><p>We work with organizations that require dependable technology solutions, skilled professionals and responsive execution.</p><p>Our objective is simple: understand the requirement, build the right solution and deliver with professionalism.</p><h3 style="margin-top:34px">Our Vision</h3><p style="margin-top:8px">To become a trusted technology and engineering solutions partner for organizations working on India’s most demanding technical and operational requirements.</p><h3 style="margin-top:26px">Our Mission</h3><p style="margin-top:8px">To deliver reliable solutions, skilled resources and responsive support while maintaining professional standards, transparency and long-term client relationships.</p></div></div></div></section>
+<section class="co">${bgs(['blueprint.jpg','cnc.jpg','controlroom.jpg','hangar.jpg'])}<div class="w"><div class="hd rv"><div><div class="eb">02 / Company</div><h2>Company Leadership</h2></div><p>A&J Engineering Solutions is professionally managed by a leadership team with combined experience across defence, aerospace, technology and operations.</p></div>
+<div class="rv" style="max-width:720px;border-top:1px solid var(--line);padding-top:26px"><span class="num">Director</span><h2 style="font-size:clamp(32px,4vw,52px)">Prince Singh</h2><p style="margin-top:16px;font-size:16px">Oversees daily operations, ensuring the company’s manufacturing and support services meet high standards of quality and efficiency.</p></div></div></section>
+<section><div class="w"><div class="hd rv"><div><div class="eb">03 / Values</div><h2>Our Values</h2></div><p>The principles that shape how we work with every client and every engagement.</p></div>
+${[['Integrity','We believe professional relationships are built on transparency and accountability.'],['Reliability','Our clients depend on us to respond to requirements with consistency and responsibility.'],['Technical Excellence','We continuously focus on understanding technology, engineering and evolving industry requirements.'],['Responsiveness','We believe timely communication is an essential part of successful execution.'],['Partnership','We aim to work alongside our clients rather than simply work for them.']].map((x,i)=>`<div class="si rv"><span class="num">0${i+1}</span><div><h3>${x[0]}</h3><p style="margin:0">${x[1]}</p></div></div>`).join('')}</div></section>
+${ctaBand('Let’s Build the Right Solution Together.')}`;
+P['/services']=()=>`<section class="pg"><div class="big" aria-hidden="true">&#9679;</div><div class="w"><div class="eb">Services</div><h1>Solutions Designed Around <em>Your Requirements</em></h1><p style="font-size:19px;margin-top:20px;max-width:640px">Integrated technology, engineering, manpower and procurement capabilities delivered with technical depth and responsive coordination.</p></div></section>
+<section style="padding-top:0"><div class="w">${SV.map((s,i)=>`<div class="si rv"><span class="num">0${i+1}</span><div><h3>${s.cap}</h3><p style="margin:12px 0 0;max-width:720px">${s.all}</p>${chips(s.chips)}</div><a class="lk" href="/${s.id}/">Learn more <svg class="ai" viewBox="0 0 11 11" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 10L10 1M3 1h7v7"/></svg></a></div>`).join('')}</div></section>
+${ctaBand('Have a Requirement? Let’s Build the Right Solution.')}`;
+const others=id=>`<section><div class="w"><div class="eb">Other Services</div><div class="ol">${SV.filter(s=>s.id!=id).map(s=>`<a href="/${s.id}/"><i>0${SV.indexOf(s)+1}</i>${s.cap}</a>`).join('')}</div></div></section>`;
+const svc=s=>`<section class="pg"><div class="big" aria-hidden="true">${s.n}</div><div class="w wx"><div class="hg"><div><div class="eb">${s.lab}</div><h1 style="font-size:clamp(38px,5vw,66px);max-width:900px">${s.h}</h1><p style="font-size:18px;margin-top:22px;max-width:760px">${s.all}</p></div><div id="ss"></div></div></div></section>
+<section style="padding-top:0"><div class="w">${s.secs.map(x=>x).length>1?`<div class="ls">`:`<div class="ls c3">`}${s.secs.map(x=>`<div class="rv"><h3>${x[0]}</h3><ul>${x[1].map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('')}</div>${s.note?`<p class="rv" style="margin-top:40px;font-size:17px;max-width:760px;color:var(--text)">${s.note}</p>`:''}</div></section>
+${s.id=='staffing'?`<section style="padding-top:0"><div class="w"><div class="eb">Process</div><h2>How We Work</h2><p style="margin-top:14px">A structured approach from requirement to continued support.</p><div class="pr">${[['Requirement','Understand the role and technical requirement.'],['Sourcing','Identify suitable professionals.'],['Screening','Evaluate technical and professional suitability.'],['Deployment','Coordinate joining and deployment.'],['Support','Continue coordination throughout the engagement.']].map((x,i)=>`<div class="rv"><span class="num">0${i+1}</span><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join('')}</div></div></section>`:''}
+<section class="cta"><div class="w rv"><div class="eb">${s.n} / Capability</div><h2>${s.cap}</h2><h3 style="margin-top:40px">${s.cta}</h3><p style="margin-top:10px;max-width:520px">Share your requirement and our team will respond with the appropriate solution and next steps.</p><div class="row" style="margin-top:20px"><a class="btn r" href="/requirement/">${s.cta} <svg class="ai" viewBox="0 0 11 11" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 10L10 1M3 1h7v7"/></svg></a></div></div></section>${others(s.id)}`;
+SV.forEach(s=>P['/'+s.id]=()=>svc(s));
+P['/psu']=()=>`<section class="pg"><div class="w wx"><div class="hg"><div><div class="eb">Defence &amp; PSU</div><h1 style="font-size:clamp(38px,5vw,66px);max-width:900px">Technology &amp; Engineering for Mission-Critical Environments</h1><p style="font-size:18px;margin-top:22px;max-width:760px">${PSU_TXT}</p></div><div id="ss"></div></div></div></section>
+<section style="padding-top:0"><div class="w"><div class="hd rv"><div><div class="eb">01 / Capability Areas</div><h2>Built for demanding <em>environments.</em></h2></div><p>Integrated capability areas configured around the technical and operational needs of each programme.</p></div>
+<div class="g3">${[['Defence Technology','Technology solutions and support aligned with the requirements of defence-oriented programmes and establishments.'],['Engineering Support','Engineering assistance for technically demanding systems, components and project requirements.'],['Technical Manpower','Skilled engineering, IT and technical professionals for project, deputation and operational requirements.'],['IT Infrastructure','Computing, server, storage and networking infrastructure for secure and demanding environments.'],['Government Procurement','GeM cataloguing, tender documentation and procurement coordination support.'],['Project Support','Coordination, documentation and on-ground support through the lifecycle of an engagement.']].map((x,i)=>`<div class="rv"><span class="num">0${i+1}</span><h3>${x[0]}</h3><p style="margin-top:10px;font-size:13px">${x[1]}</p></div>`).join('')}</div></div></section>
+<section style="padding:0"><div class="two"><div class="sl" data-sl="hangar.jpg,controlroom.jpg,cnc.jpg,blueprint.jpg" data-t="Aerospace and engineering – technology-focused support"></div><div class="rv"><div class="eb">02 / Experience</div><h2>Exposure Within <em>Critical Ecosystems</em></h2><p style="margin-top:24px">Our team has experience and exposure within ecosystems associated with defence research, aerospace and public-sector organizations, including DRDO-linked laboratories and PSU establishments.</p><p style="font-size:12px">References to these ecosystems describe experience and exposure gained by our team, and do not imply any current contractual relationship or endorsement.</p>${chips(['DRDO','PSU','Aerospace','Government','Staffing'])}</div></div></section>
+${ctaBand('Discuss a Defence or PSU Requirement.')}`;
+P['/contact']=()=>{return `<section class="pg"><div class="w"><div class="eb">Contact</div><h1>Let’s Start a <em>Conversation</em></h1><p style="font-size:18px;margin-top:20px;max-width:640px">Have a project, manpower requirement, technology requirement or procurement requirement? Tell us what you are looking for and our team will get back to you.</p>
+<div class="cg" style="margin-top:56px"><div class="ci rv"><label>Main email</label><p><a href="mailto:hr@ajengineeringsolutions.com">hr@ajengineeringsolutions.com</a></p><label>Official email</label><p><a href="mailto:ajengineeringsolutions8@gmail.com">ajengineeringsolutions8@gmail.com</a></p><label>Contact &amp; inquiry email</label><p><a href="mailto:jay@ajengineering.in">jay@ajengineering.in</a></p><label>Phone</label><p><a href="tel:+919026224094">+91 90262 24094</a></p><label>Head Office</label><p>No. 75, Fatima Manzil, 7th Main Road, 5th Cross, Subhana Garden, Vijayanagar, Bangalore 560 040</p><label>Branch Office</label><p>Sundrewala, Near Primary School, Raipur Road, Dehradun (Uttarakhand)</p></div>
+<div class="rv" style="border:1px solid var(--line);padding:34px;background:var(--panel)"><h3>Ready to share your requirement?</h3><p style="margin:14px 0 26px">Tell us what you need. Our team will understand your requirement and connect you with the appropriate solution.</p><a class="btn r" href="/requirement/">Submit your requirement <svg class="ai" viewBox="0 0 11 11" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 10L10 1M3 1h7v7"/></svg></a></div></div></div></section>`};
+P['/requirement']=()=>{const o=['Select a requirement type','IT Solution','Engineering','Defence / PSU','Manpower','GeM / Procurement','AMC / Support','Other'];return `<section class="pg"><div class="big" aria-hidden="true"><svg class="ai" viewBox="0 0 11 11" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 10L10 1M3 1h7v7"/></svg></div><div class="w"><div class="eb">Submit Requirement</div><h1>Submit Your <em>Requirement</em></h1><p style="font-size:18px;margin:20px 0 48px;max-width:640px">Tell us what you need. Our team will understand your requirement and connect you with the appropriate solution.</p><div style="max-width:820px"><form id="fm" class="rv"><div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label for="hp">Leave this empty</label><input id="hp" tabindex="-1" autocomplete="off"></div><div><label for="a">Name</label><input id="a" required></div><div><label for="b">Company / Organization</label><input id="b"></div><div><label for="c">Email</label><input id="c" type="email" required></div><div><label for="d">Phone</label><input id="d" type="tel"></div><div class="f"><label for="e">Requirement Type</label><select id="e">${o.map((x,i)=>`<option value="${i?x:''}">${x}</option>`).join('')}</select></div><div class="f"><label for="g">Requirement Details</label><textarea id="g" rows="5"></textarea></div><div class="f"><button class="btn r" type="submit">Submit requirement <svg class="ai" viewBox="0 0 11 11" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 10L10 1M3 1h7v7"/></svg></button><p id="ok" role="status" style="margin-top:12px"></p></div></form></div></div></section>`};
+/* ================= CRM CONNECTION (PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE) ================= */
+const CRM_URL='https://script.google.com/macros/s/AKfycbwsqc1l8NEhAADXzWi_blPhHNztX8Dx-Bm7NnNTQkwy0Bjb3MuoGgA-TNhsgZKLqQHuow/exec';
+/* ================= ROUTER & BEHAVIOUR ================= */
+const nav=$('#nv'),mb=$('#mb');
+$('#sub').innerHTML=[['/services','All Services'],...SV.map(s=>['/'+s.id,s.nav]),['/psu','Defence & PSU']].map(x=>`<li><a href="${x[0]}/">${x[1]}</a></li>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+let dvT,path=location.pathname.replace(/\/+$/,'')||'/';
+function render(){clearInterval(dvT);const p=path,k=P[p]?p:'/';app.innerHTML=P[k]();scrollTo(0,0);
+nav.classList.remove('o');mb.setAttribute('aria-expanded','false');
+document.querySelectorAll('nav a.n').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==(k=='/'?'/':k+'/')||(k!='/'&&a.getAttribute('href')=='/services/'&&SV.some(s=>'/'+s.id==k))));
+const id=k.slice(1),s=SV.find(x=>x.id==id);const m=SEO[k]||SEO['/'];document.title=m.t;const md=document.querySelector('meta[name=description]');if(md)md.content=m.d;const cn=document.querySelector('link[rel=canonical]');if(cn)cn.href=SITE+(k=='/'?'/':k+'/');
+document.querySelectorAll('[data-sl]').forEach((e,k)=>slider(e,e.dataset.sl.split(',').map(i=>({img:i,t:e.dataset.t})),2500+k%3*150));
+if($('#hs'))$('#hs').replaceWith(Object.assign(sliderEl(ALL.map((x,i)=>({href:'/'+x.id+'/',img:['meeting.jpg','datacenter.jpg','hangar.jpg','warehouse.jpg','hardware.jpg','controlroom.jpg'][i],t:x.t,d:x.d})),2300),{id:'hs'}));
+if($('#ss')){const im=s?s.img:['controlroom.jpg','hangar.jpg','cnc.jpg','blueprint.jpg'];$('#ss').replaceWith(sliderEl(im.map(i=>({img:i,t:s?s.cap:'Defence & PSU'})),2500))}
+if($('#dv')){let c=0;const set=i=>{c=i;const x=ALL[i];$('#dn').textContent='0'+(i+1)+' / What we deliver';$('#dt').textContent=x.id=='psu'?'Defence & PSU':x.t=='Defence & Engineering'?'Defence & Engineering Solutions':x.t;$('#dd').textContent=x.d;$('#dl').textContent='View '+x.t;$('#dl').href='/'+x.id+'/';document.querySelectorAll('#dv .bg').forEach((b,j)=>b.classList.toggle('on',j==i));document.querySelectorAll('.tabs button').forEach((b,j)=>b.classList.toggle('on',j==i))};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{set(+b.dataset.i);clearInterval(dvT)});set(0);dvT=setInterval(()=>set((c+1)%6),5000)}
+if($('#fm'))$('#fm').onsubmit=async e=>{e.preventDefault();const f=e.target,v=i=>$('#'+i).value.trim(),ok=$('#ok'),btn=f.querySelector('button[type=submit]');if($('#hp').value)return;
+if(CRM_URL.indexOf('https://script.google.com/')!==0){ok.style.color='#ffb4ad';ok.textContent='This form is not connected yet. Please email hr@ajengineeringsolutions.com or call +91 90262 24094.';return}
+btn.disabled=true;ok.style.color='';ok.textContent='Sending your requirement...';
+try{await fetch(CRM_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams({name:v('a'),company:v('b'),email:v('c'),phone:v('d'),type:v('e'),details:v('g'),page:location.href})});f.reset();ok.style.color='#9be3b0';ok.textContent='Thank you! Your requirement has been submitted. Our team will contact you shortly.'}
+catch(_){ok.style.color='#ffb4ad';ok.textContent='Sorry, we could not send your requirement. Please check your connection and try again, or email hr@ajengineeringsolutions.com.'}
+finally{btn.disabled=false}};
+document.querySelectorAll('.rv').forEach(e=>{const p=e.parentElement;e.style.transitionDelay=Math.min([...p.children].indexOf(e),6)*.08+'s';io.observe(e)});
+document.querySelectorAll('.ls li').forEach((l,i)=>l.style.animationDelay=(i%8)*.07+.25+'s');
+document.querySelectorAll('.pg h1,.hero h1').forEach(e=>sp(e,0));
+(HV?document.querySelectorAll('.card,.sc a,.hero .sl'):[]).forEach(e=>{e.classList.add('tilt');e.addEventListener('mousemove',ev=>{const r=e.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width-.5,y=(ev.clientY-r.top)/r.height-.5;e.style.transition='transform .12s';e.style.transform=`perspective(900px) rotateY(${x*9}deg) rotateX(${-y*9}deg) translateZ(6px)`});e.addEventListener('mouseleave',()=>{e.style.transition='transform .5s';e.style.transform=''})});
+scrl()}
+function sp(el,i){[...el.childNodes].forEach(n=>{if(n.nodeType==3){const f=document.createDocumentFragment();n.textContent.split(/(\s+)/).forEach(w=>{if(!w.trim()){f.append(w);return}const o=document.createElement('span'),s=document.createElement('span');o.className='wd';s.textContent=w;s.style.animationDelay=(.35+i++*.07)+'s';o.append(s);f.append(o)});n.replaceWith(f)}else if(n.nodeType==1)i=sp(n,i)});return i}
+let first=1;const cur=$('#cur');
+function route(){if(first||matchMedia('(prefers-reduced-motion:reduce)').matches){first=0;render();return}cur.className='cur';void cur.offsetWidth;cur.className='cur go';setTimeout(()=>{render();app.classList.remove('ent');void app.offsetWidth;app.classList.add('ent');cur.className='cur out';setTimeout(()=>cur.className='cur',600)},380)}
+function scrl(){const p=scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight);document.querySelectorAll('.big').forEach(b=>b.style.translate='0 '+scrollY*.14+'px')}
+let tk=0;addEventListener('scroll',()=>{if(!tk){tk=1;requestAnimationFrame(()=>{tk=0;scrl()})}},{passive:true});
+function navTo(p){if(p==path){scrollTo({top:0,behavior:'smooth'});return}path=p;try{history.pushState({},'',p=='/'?'/':p+'/')}catch(_){}route()}
+addEventListener('popstate',()=>{const p=location.pathname.replace(/\/+$/,'')||'/';if(p!=path){path=p;route()}});
+document.addEventListener('click',e=>{if(e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey)return;const a=e.target.closest&&e.target.closest('a[href^="/"]');if(!a||a.target)return;const hr=a.getAttribute('href');if(!/^\/[\w-]*\/?$/.test(hr))return;const p=hr.replace(/\/+$/,'')||'/';if(!P[p])return;e.preventDefault();const d=a.closest('.dd');if(d){d.classList.add('x');d.onmouseleave=()=>d.classList.remove('x');a.blur()}nav.classList.remove('o');mb.setAttribute('aria-expanded','false');navTo(p)});
+route();
+mb.onclick=()=>{const o=nav.classList.toggle('o');mb.setAttribute('aria-expanded',o)};
+
+/* animated star particles (two depth layers, drift + twinkle + mouse parallax) */
+const mob=innerWidth<700;let mx=0,my=0;
+addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+(()=>{const c=$('#fx'),x=c.getContext('2d');let W,H,P=[],dpr=Math.min(devicePixelRatio||1,1.5);
+const rs=()=>{W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);const n=mob?34:85;P=Array.from({length:n},(_,i)=>{const z=i%4==0?2:1;return{x:Math.random()*W,y:Math.random()*H,z,r:z==2?Math.random()*1.3+1:Math.random()*.9+.35,vx:(Math.random()-.5)*.05*z,vy:-(Math.random()*.1+.03)*z,p:Math.random()*6.28,s:Math.random()*.025+.008,h:Math.random()<.7?'150,165,255':'185,150,255'}})};rs();addEventListener('resize',rs);
+let px=0,py=0,run=1;document.addEventListener('visibilitychange',()=>{run=!document.hidden;if(run)f()});
+function f(){if(!run)return;x.clearRect(0,0,W,H);px+=(mx-px)*.05;py+=(my-py)*.05;
+P.forEach(q=>{q.p+=q.s;q.x+=q.vx;q.y+=q.vy;if(q.y<-6){q.y=H+6;q.x=Math.random()*W}if(q.x<-6)q.x=W+6;if(q.x>W+6)q.x=-6;const a=.15+.6*Math.abs(Math.sin(q.p)),X=q.x+px*-26*q.z,Y=q.y+py*-20*q.z;
+if(q.z==2){const g=x.createRadialGradient(X,Y,0,X,Y,q.r*5);g.addColorStop(0,`rgba(${q.h},${a*.7})`);g.addColorStop(1,`rgba(${q.h},0)`);x.fillStyle=g;x.fillRect(X-q.r*5,Y-q.r*5,q.r*10,q.r*10)}
+x.fillStyle=`rgba(${q.h},${a})`;x.beginPath();x.arc(X,Y,q.r,0,6.283);x.fill()});
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)requestAnimationFrame(f)}f()})();
+if(HV){let q=0;addEventListener('pointermove',()=>{if(!q){q=1;requestAnimationFrame(()=>{q=0;document.documentElement.style.setProperty('--mx',mx.toFixed(3));document.documentElement.style.setProperty('--my',my.toFixed(3))})}},{passive:true})}
+/* custom neon cursor (fine pointers only) */
+if(HV&&!matchMedia('(pointer:coarse)').matches){document.documentElement.classList.add('cc');
+const g=$('#cg'),ring=$('#cr'),d=$('#cd'),T=Array.from({length:6},()=>{const e=document.createElement('div');e.className='ct';document.body.append(e);return{e,x:0,y:0}});
+let tx=innerWidth/2,ty=innerHeight/2,rx=tx,ry=ty,gx=tx,gy=ty,on=0;
+const show=v=>{on=v;[g,ring,d].forEach(e=>e.style.opacity=v?1:0);T.forEach((t,i)=>t.e.style.opacity=v?(.34-i*.05):0)};
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;d.style.transform=`translate3d(${tx}px,${ty}px,0)`;if(!on){rx=gx=tx;ry=gy=ty;T.forEach(t=>{t.x=tx;t.y=ty});show(1)}},{passive:true});
+document.addEventListener('mouseleave',()=>show(0));document.addEventListener('mouseenter',()=>show(1));
+document.addEventListener('mousedown',()=>ring.classList.add('d'));document.addEventListener('mouseup',()=>ring.classList.remove('d'));
+document.addEventListener('pointerover',e=>ring.classList.toggle('h',!!e.target.closest('a,button,input,select,textarea')));
+(function L(){if(!document.hidden){rx+=(tx-rx)*.16;ry+=(ty-ry)*.16;gx+=(tx-gx)*.07;gy+=(ty-gy)*.07;ring.style.transform=`translate3d(${rx}px,${ry}px,0)`;g.style.transform=`translate3d(${gx}px,${gy}px,0)`;let px=tx,py=ty;T.forEach((t,i)=>{t.x+=(px-t.x)*(.34-i*.04);t.y+=(py-t.y)*(.34-i*.04);t.e.style.transform=`translate3d(${t.x}px,${t.y}px,0) scale(${1-i*.12})`;px=t.x;py=t.y})}requestAnimationFrame(L)})()}</script></body></html>
